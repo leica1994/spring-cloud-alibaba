@@ -30,6 +30,7 @@ import java.util.regex.Pattern;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
+import com.alibaba.nacos.api.exception.NacosException;
 import com.alibaba.nacos.api.naming.NamingMaintainService;
 import com.alibaba.nacos.api.naming.NamingService;
 import com.alibaba.nacos.api.naming.PreservedMetadataKeys;
@@ -274,8 +275,8 @@ public class NacosDiscoveryProperties {
 	}
 
 	@PreDestroy
-	public void destroy() {
-
+	public void destroy() throws NacosException {
+		namingService.shutDown();
 	}
 
 	public String getEndpoint() {
